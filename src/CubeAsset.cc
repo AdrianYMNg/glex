@@ -77,6 +77,10 @@ void checkError(std::string file, int line) {
     exit(-1);
   }
 }
+void CubeAsset::Draw(GLuint program_token) {
+	glm::mat4 m = this->getModelMatrix();
+	GLuint model_uniform = glGetUniformLocation(program_token, "model");
+	glUniformMatrix4fv(model_uniform, 1, false, glm::value_ptr(m));
 
 void CubeAsset::Draw(GLuint program_token) {
   if(!glIsProgram(program_token)) {

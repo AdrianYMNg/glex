@@ -21,6 +21,7 @@ GameAssetManager::GameAssetManager(ApplicationMode mode) {
   };
 
   program_token = CreateGLProgram(vertex_shader, fragment_shader);
+  camera = std::make_shared<Camera>();
 }
 
 /**
@@ -66,11 +67,40 @@ void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
  * Draws each GameAsset in the scene graph.
  */
 void GameAssetManager::Draw() {
-  for(auto ga: draw_list) {
-    ga->Draw(program_token);
-  }
+	
+SDL_Event event;
+while( SDL_PollEvent(&event)){ SDL_KEYDOWN: 
+		switch( event.key.keysym.sym ){
+			case SDLK_UP:
+				camera->move_z(+0.5);
+				break;
+			case SDLK_DOWN:
+				camera->move_z(-0.5);
+				break;
+			case SDLK_LEFT:
+				camera->move_x(+0.5);
+				break;
+			case SDLK_RIGHT:
+				camera->move_x(-0.5);
+				break;
+			}
+		case SDL_QUIT:
+		        exit(0);
+			break;
+		default:
+			break;
+	}
 }
 
+	glm::mat4 c = camera->getViewMatrix();
+	GLuint view_uniform = glGetUniformLocation(program_token, "view");
+	glUniformMatrix4fv(view_uniform, 1, false, glm::value_ptr(c));
+
+	for(auto ga: draw_list) {
+    	ga->Draw(program_token);
+  	}
+}
+}
 /**
  * When given the contents of a vertex shader and fragment shader
  * GameAssetManager::CreateGLProgram will compile and link them.  This

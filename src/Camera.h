@@ -7,8 +7,8 @@
 #ifndef SRC_CAMERA_H_
 #define SRC_CAMERA_H_
 
-class Camera {
-public:
+class Camera : public GameAsset {
+ public:
 	Camera();
 	virtual ~Camera();
 	glm::mat4 getViewMatrix();
@@ -18,4 +18,4 @@ private:
 
 };
 
-#endif
+#endif // CAMERA_H
