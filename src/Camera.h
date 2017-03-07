@@ -9,7 +9,8 @@
 
 class Camera : public GameAsset {
  public:
-	Camera();~Camera();
+	Camera();
+	virtual ~Camera();
 	glm::mat4 getViewMatrix();
 
 private:

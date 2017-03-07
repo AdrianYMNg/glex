@@ -100,6 +100,7 @@ while( SDL_PollEvent(&event)){ SDL_KEYDOWN:
     	ga->Draw(program_token);
   	}
 }
+}
 /**
  * When given the contents of a vertex shader and fragment shader
  * GameAssetManager::CreateGLProgram will compile and link them.  This
